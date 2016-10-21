@@ -9,6 +9,10 @@ using System.ComponentModel;
 
 namespace PizzaManagement.ViewModels
 {
+   /// <summary>
+   /// 
+   /// </summary>
+   /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
    public class ClientViewModel : INotifyPropertyChanged
    {
       #region Interface Members
