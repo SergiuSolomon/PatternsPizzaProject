@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PizzaManagement"
+        xmlns:controls="clr-namespace:PizzaManagement.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="364.327" Width="525">
     <Grid>
-        
-    </Grid>
+        <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="*"></ColumnDefinition>
+           <ColumnDefinition Width="*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      <controls:Client Grid.Column="0"></controls:Client>
+      <controls:Manufacturer Grid.Column="1"></controls:Manufacturer>
+   </Grid>
 </Window>
