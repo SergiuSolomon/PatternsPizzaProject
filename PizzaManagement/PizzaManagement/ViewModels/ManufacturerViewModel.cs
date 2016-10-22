@@ -4,16 +4,25 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-
+using PizzaManagement.Models;
 
 namespace PizzaManagement.ViewModels
 {
    public class ManufacturerViewModel : INotifyPropertyChanged
    {
-      #region Interface Members
 
-      public event PropertyChangedEventHandler PropertyChanged;
+        public ManufacturerViewModel()
+        {
+            Items = new ObservableCollection<Order>();
+        }
+
+        public ObservableCollection<Order> Items { get; set; }
+
+        #region Interface Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
       #endregion
 

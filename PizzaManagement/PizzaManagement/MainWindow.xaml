@@ -6,13 +6,15 @@
         xmlns:local="clr-namespace:PizzaManagement"
         xmlns:controls="clr-namespace:PizzaManagement.Controls"
         mc:Ignorable="d"
-        Title="MainWindow" Height="364.327" Width="525">
+        Title="MainWindow" Height="364.327" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
            <ColumnDefinition Width="*"></ColumnDefinition>
-           <ColumnDefinition Width="*"></ColumnDefinition>
-      </Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
       <controls:Client Grid.Column="0"></controls:Client>
-      <controls:Manufacturer Grid.Column="1"></controls:Manufacturer>
+        <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"></GridSplitter>
+      <controls:Manufacturer Grid.Column="2"></controls:Manufacturer>
    </Grid>
 </Window>

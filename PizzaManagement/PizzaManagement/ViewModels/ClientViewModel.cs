@@ -4,8 +4,10 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
-
+using PizzaManagement.Models;
 
 namespace PizzaManagement.ViewModels
 {
@@ -15,9 +17,22 @@ namespace PizzaManagement.ViewModels
    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
    public class ClientViewModel : INotifyPropertyChanged
    {
-      #region Interface Members
+       public ClientViewModel()
+        {
+            CreateListOfOrders();
+        }
 
-      public event PropertyChangedEventHandler PropertyChanged;
+        private void CreateListOfOrders()
+        {
+            Items = new ObservableCollection<Order>();
+            Items.Add(new Order { PizzaType = PizzaType.CheesePizza });
+        }
+
+        public ObservableCollection<Order> Items { get; set; }
+
+        #region Interface Members
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
       #endregion
 

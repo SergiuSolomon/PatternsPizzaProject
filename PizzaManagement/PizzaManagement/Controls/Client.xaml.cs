@@ -24,5 +24,13 @@ namespace PizzaManagement.Controls
       {
          InitializeComponent();
       }
-   }
+
+        private void ClientAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if ( string.Equals( e.PropertyName , "status", StringComparison.OrdinalIgnoreCase))
+            {
+                e.Cancel = true;
+            } 
+        }
+    }
 }
