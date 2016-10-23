@@ -55,8 +55,26 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CheesePizza.cs" />
+    <Compile Include="CheesePizzaBuilder.cs" />
+    <Compile Include="CornTopping.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="Ingredient.cs" />
+    <Compile Include="IPizzaBuilder.cs" />
+    <Compile Include="LargePizzaBuilderDecorator.cs" />
+    <Compile Include="MediumPizzaBuilderDecorator.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="IPizza.cs" />
+    <Compile Include="OliveTopping.cs" />
+    <Compile Include="Pizza.cs" />
+    <Compile Include="PizzaBuilder.cs" />
+    <Compile Include="PizzaBuilderFactory.cs" />
+    <Compile Include="PizzaDecorator.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SmallPizzaBuilderDecorator.cs" />
+    <Compile Include="Topping.cs" />
+    <Compile Include="VeggiePizza.cs" />
+    <Compile Include="VeggiePizzaBuilder.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\ManufacturerViewModel.cs" />
     <Page Include="Controls\Client.xaml">
