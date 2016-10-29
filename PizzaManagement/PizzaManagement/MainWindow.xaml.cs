@@ -23,6 +23,12 @@ namespace PizzaManagement
       public MainWindow()
       {
          InitializeComponent();
+
+         IPizza pizza = Kitchen.Instance.MakePizza( PizzaType.CheesePizza, PizzaSize.Medium, DoughType.Traditional, new List<ToppingType> { ToppingType.Corn } );
+         System.Diagnostics.Debug.Print( pizza.ToString() );
+
+         pizza = Kitchen.Instance.MakePizza( PizzaType.VeggiePizza, PizzaSize.Small, DoughType.Thin, new List<ToppingType> { ToppingType.Olives, ToppingType.Olives } );
+         System.Diagnostics.Debug.Print( pizza.ToString() );
       }
    }
 }

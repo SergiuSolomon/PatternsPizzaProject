@@ -2,10 +2,9 @@
 {
    interface IPizzaBuilder
    {
-      void BuildDough(DoughType doughType);
+      void BuildDough();
       void AddIngredients();
       void Cook();
-      void AddToppings();
       IPizza GetPizza();
    }
 }

@@ -1,38 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaManagement
 {
-   abstract class PizzaBuilder : IPizzaBuilder
+   internal abstract class PizzaBuilder : IPizzaBuilder
    {
       protected Pizza _pizza;
 
-      public PizzaBuilder()
+      protected PizzaBuilder()
       {}
 
       public abstract void AddIngredients();
 
-      public void AddToppings()
+      public virtual void BuildDough()
       {
-         throw new NotImplementedException();
+         _pizza.DoughType = DoughType.Traditional; //?
       }
 
-      public void BuildDough( DoughType doughType ) // Can be a separate decorator?
+      public virtual void Cook()
       {
-         _pizza.DoughType = doughType;
       }
 
-      public void Cook()
+      public virtual IPizza GetPizza()
       {
-         throw new NotImplementedException();
-      }
-
-      public IPizza GetPizza()
-      {
-         throw new NotImplementedException();
+         return _pizza;
       }
    }
 }

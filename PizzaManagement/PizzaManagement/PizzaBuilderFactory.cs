@@ -1,54 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PizzaManagement
 {
-   class PizzaBuilderFactory // aka Kitchen
+   internal class PizzaBuilderFactory
    {
-      public IPizzaBuilder Create( PizzaType pizzaType, PizzaSize pizzaSize )
+      public IPizzaBuilder Create( PizzaType pizzaType, PizzaSize pizzaSize, DoughType doughType, IEnumerable<ToppingType> toppings )
       {
          PizzaBuilder pizzaBuilder = null;
          switch ( pizzaType ) {
             case PizzaType.CheesePizza:
-               pizzaBuilder = new CheesePizzaBuilder();
+               pizzaBuilder = new CheesePizzaBuilder( pizzaSize );
                break;
             case PizzaType.VeggiePizza:
-               pizzaBuilder = new VeggiePizzaBuilder();
+               pizzaBuilder = new VeggiePizzaBuilder( pizzaSize );
                break;
             default:
                throw new ArgumentException( "Unsupported pizza type!" );
          }
-         switch ( pizzaSize ) {
-            case PizzaSize.Small:
-                  return new SmallPizzaBuilderDecorator( pizzaBuilder );
-            case PizzaSize.Medium:
-               return new MediumPizzaBuilderDecorator( pizzaBuilder );
-            case PizzaSize.Large:
-               return new LargePizzaBuilderDecorator( pizzaBuilder );
+         switch ( doughType ) {
+            case DoughType.Thin:
+               pizzaBuilder = new ThinPizzaBuilderDecorator( pizzaBuilder );
+               break;
+            case DoughType.Traditional:
+               pizzaBuilder = new TraditionalPizzaBuilderDecorator( pizzaBuilder );
+               break;
             default:
-               throw new ArgumentException( "Unsupported pizza size!" );
+               throw new ArgumentException( "Unsupported pizza dough type!" );
          }
-      }
-
-      // Example main
-      public static void MainExample()
-      {
-         DoughType doughType = DoughType.Thin;
-         IEnumerable<ToppingType> toppings = new List<ToppingType> { ToppingType.Corn, ToppingType.Olives };
-
-
-         PizzaBuilderFactory factory = new PizzaBuilderFactory();
-         IPizzaBuilder pizzaBuilder = factory.Create(PizzaType.CheesePizza, PizzaSize.Large);
-
-         pizzaBuilder.BuildDough(doughType);
-         pizzaBuilder.AddIngredients();
-         pizzaBuilder.AddToppings();
-         pizzaBuilder.Cook();
-
-         IPizza pizza = pizzaBuilder.GetPizza();
+         foreach ( ToppingType toppingType in toppings ) {
+            switch ( toppingType ) {
+               case ToppingType.Corn:
+                  pizzaBuilder = new CornPizzaBuilderDecorator( pizzaBuilder );
+                  break;
+               case ToppingType.Olives:
+                  pizzaBuilder = new OlivesPizzaBuilderDecorator( pizzaBuilder );
+                  break;
+               default:
+                  throw new ArgumentException( "Unsupported pizza topping!" );
+            }
+         }
+         return pizzaBuilder;
       }
    }
 }

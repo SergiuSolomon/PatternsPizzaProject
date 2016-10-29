@@ -2,7 +2,7 @@
 
 namespace PizzaManagement
 {
-   interface IPizza
+   public interface IPizza
    {
       uint ProductionPrice { get; }
       uint FinalPrice { get; }
@@ -11,5 +11,6 @@ namespace PizzaManagement
       DoughType DoughType { get; }
       IEnumerable<ToppingType> Toppings { get; }
       IEnumerable<IngredientType> Ingredients { get; }
+      string Description { get; }
    }
 }

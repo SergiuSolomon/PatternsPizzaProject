@@ -25,8 +25,15 @@
 
    public enum IngredientType
    {
+      Flour,
       Mozarella,
       Salami,
+      Provolone,
+      BlueCheese,
+      ParmigianoReggiano,
+      VeganCheese,
+      VeganPesto,
+      Peppers,
    }
 
    public enum PizzaSize
