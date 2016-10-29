@@ -10,10 +10,11 @@ using PizzaManagement.Models;
 
 namespace PizzaManagement.ViewModels
 {
-   public class ManufacturerViewModel : INotifyPropertyChanged
+    public class ManufacturerViewModel : Sender, INotifyPropertyChanged
    {
+        private string _message;
 
-        public ManufacturerViewModel()
+        public ManufacturerViewModel(Mediator mediator)
         {
             Items = new ObservableCollection<Order>();
         }
@@ -24,11 +25,30 @@ namespace PizzaManagement.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-      #endregion
+        public void Notify(Order order, string message)
+        {
+            Items.Add(order.Clone());
+            Message = message;
+        }
 
-      #region Methods - Protected
+        public string Message
+        {
+            get
+            {
+                return _message;
+            }
+            set
+            {
+                _message = value;
+                RaisePropertyChanged(nameof(Message));
+            }
+        }
 
-      protected virtual void RaisePropertyChanged( string propertyName )
+        #endregion
+
+        #region Methods - Protected
+
+        protected virtual void RaisePropertyChanged( string propertyName )
       {
          PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
       }
