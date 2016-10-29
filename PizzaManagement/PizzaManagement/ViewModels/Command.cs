@@ -14,17 +14,23 @@ namespace PizzaManagement.ViewModels
         /// Executed action's delegate with parameters
         /// </summary>
         private readonly Action<object> _action;
+        /// <summary>
+        /// CanExecute function's delegate
+        /// </summary>
+        private readonly Func<object, bool> _canExecute;
 
 
-        public Command(Action<object> action)
+
+        public Command(Action<object> action,Func<object, bool> canExecute = null)
         {
             _action = action;
+            _canExecute = canExecute;
         }
 
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _canExecute ==null ? true: _canExecute(parameter);
         }
 
         public void Execute(object parameter)
@@ -33,6 +39,8 @@ namespace PizzaManagement.ViewModels
             System.Diagnostics.Debug.Assert(order != null);
             _action(parameter);
         }
+
+       
 
         /// <summary>
         ///    CanExecuteChanged event handler

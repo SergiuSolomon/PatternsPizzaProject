@@ -4,19 +4,17 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PizzaManagement.Models;
 
 namespace PizzaManagement.ViewModels
 {
-   /// <summary>
-   /// 
-   /// </summary>
-   /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-   public class ClientViewModel : Sender, INotifyPropertyChanged
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    public class ClientViewModel : Sender, INotifyPropertyChanged
     {
         private string _message;
 
@@ -56,7 +54,45 @@ namespace PizzaManagement.ViewModels
             get; 
         }
 
+        public bool HasCornTopping
+        {
+            get
+            {
+                return Order.Toppings.Contains(ToppingType.Corn);
+            }
+            set
+            {
+                if (value)
+                {
+                    Order.Toppings.Add(ToppingType.Corn);
+                }
+                else if (Order.Toppings.Contains(ToppingType.Corn))
+                {
+                    Order.Toppings.Remove(ToppingType.Corn);
+                }
+                RaisePropertyChanged(nameof(HasCornTopping));
+            }
+        }
 
+        public bool HasOlivesTopping
+        {
+            get
+            {
+                return Order.Toppings.Contains(ToppingType.Olives);
+            }
+            set
+            {
+                if (value)
+                {
+                    Order.Toppings.Add(ToppingType.Olives);
+                }
+                else if (Order.Toppings.Contains(ToppingType.Olives))
+                {
+                    Order.Toppings.Remove(ToppingType.Olives);
+                }
+                RaisePropertyChanged(nameof(HasOlivesTopping));
+            }
+        }
 
         #region Interface Members
 
@@ -75,7 +111,7 @@ namespace PizzaManagement.ViewModels
 
         public void Notify(Order order, string message)
         {
-            throw new NotImplementedException();
+            Message = message;
         }
 
         #endregion

@@ -8,7 +8,21 @@ namespace PizzaManagement
 {
    class PizzaBuilderFactory // aka Kitchen
    {
-      public IPizzaBuilder Create( PizzaType pizzaType, PizzaSize pizzaSize )
+        private static PizzaBuilderFactory  _instance = new PizzaBuilderFactory();
+        private PizzaBuilderFactory()
+        {
+
+        }
+
+        public static PizzaBuilderFactory Instance
+        {
+            get
+            {
+                return _instance;
+            }
+        }
+
+        public IPizzaBuilder Create( PizzaType pizzaType, PizzaSize pizzaSize )
       {
          PizzaBuilder pizzaBuilder = null;
          switch ( pizzaType ) {

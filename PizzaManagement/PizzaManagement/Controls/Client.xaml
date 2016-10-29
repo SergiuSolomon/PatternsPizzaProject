@@ -59,8 +59,8 @@
             <Label Grid.Column="0" Grid.Row="2">Dough Type:</Label>
             <ComboBox Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Source={StaticResource DoughTypeEnum}}" SelectedItem="{Binding Order.DoughType}" Height="23"></ComboBox>
             <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Height="23">
-                <CheckBox Margin="5,0,5,0">Corn Topping</CheckBox>
-                <CheckBox Margin="5,0,5,0">Olives Topping</CheckBox>
+                <CheckBox Margin="5,0,5,0" IsChecked="{Binding HasCornTopping}">Corn Topping</CheckBox>
+                <CheckBox Margin="5,0,5,0" IsChecked="{Binding HasOlivesTopping}">Olives Topping</CheckBox>
             </StackPanel>
         </Grid>
         <Label Grid.Row="2" Height="30" Margin="5" FontWeight="Bold" Background="#C3C5C7">Message for client:</Label>

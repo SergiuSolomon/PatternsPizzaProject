@@ -4,6 +4,7 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PizzaManagement.Models;
@@ -17,6 +18,27 @@ namespace PizzaManagement.ViewModels
         public ManufacturerViewModel(Mediator mediator)
         {
             Items = new ObservableCollection<Order>();
+            PreparePizzaCommand = new Command(PreparePizza, CanPreparePizza);
+        }
+
+        private bool CanPreparePizza(object arg)
+        {
+            return arg is Order;
+        }
+
+        private void PreparePizza(object obj)
+        {
+            Order order = obj as Order;
+            PizzaBuilderFactory.Instance.Create(order.PizzaType, order.PizzaSize);
+            IPizzaBuilder pizzaBuilder = PizzaBuilderFactory.Instance.Create(PizzaType.CheesePizza, PizzaSize.Large);
+
+            pizzaBuilder.BuildDough(order.DoughType);
+            pizzaBuilder.AddIngredients();
+            pizzaBuilder.AddToppings();
+            pizzaBuilder.Cook();
+
+            IPizza pizza = pizzaBuilder.GetPizza();
+            Message = "Pizza ready to send";
         }
 
         public ObservableCollection<Order> Items { get; set; }
@@ -43,6 +65,8 @@ namespace PizzaManagement.ViewModels
                 RaisePropertyChanged(nameof(Message));
             }
         }
+
+        public Command PreparePizzaCommand { get; private set; }
 
         #endregion
 
