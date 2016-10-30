@@ -4,9 +4,9 @@ namespace PizzaManagement
 {
    public interface IPizza
    {
-      uint ProductionPrice { get; }
-      uint FinalPrice { get; }
-      uint Weight { get; }
+      decimal ProductionPrice { get; }
+      decimal FinalPrice { get; }
+      decimal Weight { get; }
       PizzaSize Size { get; }
       DoughType DoughType { get; }
       IEnumerable<ToppingType> Toppings { get; }

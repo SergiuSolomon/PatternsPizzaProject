@@ -8,12 +8,25 @@ namespace PizzaManagement
       public IPizzaBuilder Create( PizzaType pizzaType, PizzaSize pizzaSize, DoughType doughType, IEnumerable<ToppingType> toppings )
       {
          PizzaBuilder pizzaBuilder = null;
+         switch ( pizzaSize ) {
+            case PizzaSize.Small:
+               pizzaBuilder = new SmallPizzaBuilder();
+               break;
+            case PizzaSize.Medium:
+               pizzaBuilder = new MediumPizzaBuilder();
+               break;
+            case PizzaSize.Large:
+               pizzaBuilder = new LargePizzaBuilder();
+               break;
+            default:
+               throw new ArgumentException( "Unsupported pizza size!" );
+         }
          switch ( pizzaType ) {
             case PizzaType.CheesePizza:
-               pizzaBuilder = new CheesePizzaBuilder( pizzaSize );
+               pizzaBuilder = new CheesePizzaBuilderDecorator( pizzaBuilder );
                break;
             case PizzaType.VeggiePizza:
-               pizzaBuilder = new VeggiePizzaBuilder( pizzaSize );
+               pizzaBuilder = new VeggiePizzaBuilderDecorator( pizzaBuilder );
                break;
             default:
                throw new ArgumentException( "Unsupported pizza type!" );

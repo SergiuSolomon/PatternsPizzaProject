@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace PizzaManagement
 {
@@ -9,16 +10,14 @@ namespace PizzaManagement
       protected PizzaBuilder()
       {}
 
-      public abstract void AddIngredients();
+      public virtual void AddIngredients()
+      {}
 
       public virtual void BuildDough()
-      {
-         _pizza.DoughType = DoughType.Traditional; //?
-      }
+      {}
 
       public virtual void Cook()
-      {
-      }
+      {}
 
       public virtual IPizza GetPizza()
       {

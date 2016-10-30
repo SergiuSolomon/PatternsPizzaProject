@@ -8,7 +8,7 @@ namespace PizzaManagement
 
       public override void AddIngredients()
       {
-         _pizzaBuilder.AddIngredients();
+         base.AddIngredients();
          GetInnerPizza().AddIngredient( IngredientType.Flour, 150 );
       }
 

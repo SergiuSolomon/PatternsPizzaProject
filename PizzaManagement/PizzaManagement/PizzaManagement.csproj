@@ -55,12 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CheesePizza.cs" />
-    <Compile Include="CheesePizzaBuilder.cs" />
+    <Compile Include="CheesePizzaBuilderDecorator.cs" />
     <Compile Include="CornPizzaBuilderDecorator.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IPizzaBuilder.cs" />
     <Compile Include="Kitchen.cs" />
+    <Compile Include="LargePizza.cs" />
+    <Compile Include="LargePizzaBuilder.cs" />
+    <Compile Include="MediumPizza.cs" />
+    <Compile Include="MediumPizzaBuilder.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="IPizza.cs" />
     <Compile Include="OlivesPizzaBuilderDecorator.cs" />
@@ -69,10 +72,11 @@
     <Compile Include="PizzaBuilderFactory.cs" />
     <Compile Include="PizzaBuilderDecorator.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="SmallPizza.cs" />
+    <Compile Include="SmallPizzaBuilder.cs" />
     <Compile Include="ThinPizzaBuilderDecorator.cs" />
     <Compile Include="TraditionalPizzaBuilderDecorator.cs" />
-    <Compile Include="VeggiePizza.cs" />
-    <Compile Include="VeggiePizzaBuilder.cs" />
+    <Compile Include="VeggiePizzaBuilderDecorator.cs" />
     <Compile Include="ViewModels\ClientViewModel.cs" />
     <Compile Include="ViewModels\Command.cs" />
     <Compile Include="ViewModels\Sender.cs" />

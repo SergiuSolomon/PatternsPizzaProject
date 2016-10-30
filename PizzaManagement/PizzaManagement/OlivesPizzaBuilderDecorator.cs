@@ -8,9 +8,8 @@ namespace PizzaManagement
 
       public override void AddIngredients()
       {
-         _pizzaBuilder.AddIngredients();
-         // TODO - can this be improved?
-         GetInnerPizza().AddTopping( ToppingType.Corn, 25 );
+         base.AddIngredients();
+         GetInnerPizza().AddTopping( ToppingType.Olives, 30 );
       }
    }
 }
