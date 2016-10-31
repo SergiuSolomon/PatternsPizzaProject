@@ -4,70 +4,115 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
-using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+
 using PizzaManagement.Models;
-using System.Collections.Generic;
+
 
 namespace PizzaManagement.ViewModels
 {
-    public class ManufacturerViewModel : Sender, INotifyPropertyChanged
+   public class ManufacturerViewModel : Sender, INotifyPropertyChanged
    {
-        private string _message;
+      #region Members
 
-        public ManufacturerViewModel(Mediator mediator)
-        {
-            Items = new ObservableCollection<Order>();
-            PreparePizzaCommand = new Command(PreparePizza, CanPreparePizza);
-        }
+      private string _message;
 
-        private bool CanPreparePizza(object arg)
-        {
-            return arg is Order;
-        }
+      #endregion
 
-        private void PreparePizza(object obj)
-        {
-            Order order = obj as Order;
-            IPizza pizza = Kitchen.Instance.MakePizza(order.PizzaType, order.PizzaSize, DoughType.Thin, new List<ToppingType>() );
-            Message = "Pizza ready to send";
-        }
+      #region Constructors
 
-        public ObservableCollection<Order> Items { get; set; }
+      /// <summary>
+      ///    Initializes a new instance of the <see cref="ManufacturerViewModel" /> class.
+      /// </summary>
+      /// <param name="mediator">The mediator.</param>
+      public ManufacturerViewModel( Mediator mediator ): base(mediator)
+      {
+         Items = new ObservableCollection<Order>();
+         PreparePizzaCommand = new Command( PreparePizza, CanPreparePizza );
+      }
 
-        #region Interface Members
+      #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
+      #region Properties
 
-        public void Notify(Order order, string message)
-        {
-            Items.Add(order.Clone());
-            Message = message;
-        }
+      public ObservableCollection<Order> Items { get; set; }
 
-        public string Message
-        {
-            get
-            {
-                return _message;
-            }
-            set
-            {
-                _message = value;
-                RaisePropertyChanged(nameof(Message));
-            }
-        }
+      /// <summary>
+      ///    Gets or sets the message.
+      /// </summary>
+      /// <value>
+      ///    The message.
+      /// </value>
+      public string Message
+      {
+         get { return _message; }
+         set
+         {
+            _message = value;
+            RaisePropertyChanged( nameof( Message ) );
+         }
+      }
 
-        public Command PreparePizzaCommand { get; private set; }
+      /// <summary>
+      ///    Gets the prepare pizza command.
+      /// </summary>
+      /// <value>
+      ///    The prepare pizza command.
+      /// </value>
+      public Command PreparePizzaCommand { get; private set; }
 
-        #endregion
+      #endregion
 
-        #region Methods - Protected
+      #region Interface Members
 
-        protected virtual void RaisePropertyChanged( string propertyName )
+      public event PropertyChangedEventHandler PropertyChanged;
+
+      #endregion
+
+      #region Methods - Public
+
+      public override void Notify( Order order, string message )
+      {
+         Items.Add( order.Clone() );
+         Message = message;
+      }
+
+      #endregion
+
+      #region Methods - Protected
+
+      protected virtual void RaisePropertyChanged( string propertyName )
       {
          PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
+      }
+
+      #endregion
+
+      #region Methods - Private
+
+      /// <summary>
+      ///    Determines whether this instance [can prepare pizza] the specified argument.
+      /// </summary>
+      /// <param name="arg">The argument.</param>
+      /// <returns>
+      ///    <c>true</c> if this instance [can prepare pizza] the specified argument; otherwise, <c>false</c>.
+      /// </returns>
+      private bool CanPreparePizza( object arg )
+      {
+         return arg is Order;
+      }
+
+      /// <summary>
+      ///    Prepares the pizza.
+      /// </summary>
+      /// <param name="obj">The object.</param>
+      private void PreparePizza( object obj )
+      {
+         Order order = obj as Order;
+         IPizza pizza = Kitchen.Instance.MakePizza( order.PizzaType, order.PizzaSize, DoughType.Thin, new List<ToppingType>() );
+         Message = "Pizza ready to send";
       }
 
       #endregion
