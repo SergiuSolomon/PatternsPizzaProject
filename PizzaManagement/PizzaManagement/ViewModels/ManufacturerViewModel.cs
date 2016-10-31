@@ -110,8 +110,8 @@ namespace PizzaManagement.ViewModels
       /// <param name="obj">The object.</param>
       private void PreparePizza( object obj )
       {
-         Order order = obj as Order;
-         IPizza pizza = Kitchen.Instance.MakePizza( order.PizzaType, order.PizzaSize, DoughType.Thin, new List<ToppingType>() );
+         Order order = (Order)obj;
+         IPizza pizza = Kitchen.Instance.MakePizza( order.PizzaType, order.PizzaSize, order.DoughType, order.Toppings );
          Message = "Pizza ready to send";
       }
 

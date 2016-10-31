@@ -28,6 +28,9 @@ namespace PizzaManagement
             case PizzaType.VeggiePizza:
                pizzaBuilder = new VeggiePizzaBuilderDecorator( pizzaBuilder );
                break;
+            case PizzaType.PepperoniPizza:
+               pizzaBuilder = new PeperonniPizzaBuilderDecorator( pizzaBuilder );
+               break;
             default:
                throw new ArgumentException( "Unsupported pizza type!" );
          }

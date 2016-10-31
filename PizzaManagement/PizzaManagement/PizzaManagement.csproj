@@ -67,6 +67,7 @@
     <Compile Include="Models\Order.cs" />
     <Compile Include="IPizza.cs" />
     <Compile Include="OlivesPizzaBuilderDecorator.cs" />
+    <Compile Include="PeperonniPizzaBuilderDecorator.cs" />
     <Compile Include="Pizza.cs" />
     <Compile Include="PizzaBuilder.cs" />
     <Compile Include="PizzaBuilderFactory.cs" />
