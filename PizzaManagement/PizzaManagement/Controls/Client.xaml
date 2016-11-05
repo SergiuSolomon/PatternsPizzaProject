@@ -33,10 +33,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+         <RowDefinition Height="*"/>
+         <RowDefinition Height="Auto"/>
+         <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" Grid.Row="0">
             <Button Height="23" Margin="5" Command="{Binding PizzaCommand}" CommandParameter="{Binding Order}">Send order</Button>
             <Border BorderBrush="Black" Height="1"></Border>
@@ -64,8 +64,6 @@
             </StackPanel>
         </Grid>
         <Label Grid.Row="2" Height="30" Margin="5" FontWeight="Bold" Background="#C3C5C7">Message for client:</Label>
-        <ScrollViewer Grid.Row="3" Height="150" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" ScrollViewer.CanContentScroll="True"  >
-            <TextBlock  TextWrapping="Wrap" Text="{Binding Message}"></TextBlock>
-        </ScrollViewer>
-    </Grid>
+      <TextBlock Grid.Row="3" Height="100" TextWrapping="Wrap" Text="{Binding Message}"></TextBlock>
+   </Grid>
 </UserControl>

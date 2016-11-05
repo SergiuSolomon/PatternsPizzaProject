@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using System.ComponentModel;
 
 namespace PizzaManagement.Models
 {
@@ -10,29 +9,13 @@ namespace PizzaManagement.Models
     /// prototype class
     /// </summary>
     [Serializable]
-    public class Order: ICloneable, INotifyPropertyChanged
+    public class Order: ICloneable
     {
-        private Status _status;
-
         public PizzaType PizzaType { get; set; }
         public DoughType DoughType { get; set; }
         public List<ToppingType> Toppings { get; set; }
         public PizzaSize PizzaSize { get; set; }
-        public Status Status
-        {
-            get
-            {
-                return _status;
-            }
-            set
-            {
-                _status = value;
-                RaisePropertyChanged(nameof(Status));
-            }
-        }
-
-        [field: NonSerializedAttribute()]
-        public event PropertyChangedEventHandler PropertyChanged;
+        public Status Status { get; set; }
 
         public Order Clone()
         {
@@ -54,11 +37,6 @@ namespace PizzaManagement.Models
 
                 return (T)formatter.Deserialize(ms);
             }
-        }
-
-        protected virtual void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
