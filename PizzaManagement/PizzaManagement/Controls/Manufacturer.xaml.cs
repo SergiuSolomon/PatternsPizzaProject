@@ -25,12 +25,6 @@ namespace PizzaManagement.Controls
          InitializeComponent();
       }
 
-        private void ManufacturerAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (string.Equals(e.PropertyName, "pizzatype", StringComparison.OrdinalIgnoreCase))
-            {
-                e.Column.IsReadOnly = true;
-            }
-        }
+       
     }
 }
