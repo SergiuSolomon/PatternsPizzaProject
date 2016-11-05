@@ -64,6 +64,12 @@
     <Compile Include="LargePizzaBuilder.cs" />
     <Compile Include="MediumPizza.cs" />
     <Compile Include="MediumPizzaBuilder.cs" />
+    <Compile Include="Notification\BridgeNotifier.cs" />
+    <Compile Include="Notification\EmailMessenger.cs" />
+    <Compile Include="Notification\IBridgeNotifier.cs" />
+    <Compile Include="Notification\IMessenger.cs" />
+    <Compile Include="Notification\SmsMessenger.cs" />
+    <Compile Include="ViewModels\BaseModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="IPizza.cs" />
     <Compile Include="OlivesPizzaBuilderDecorator.cs" />
