@@ -5,162 +5,202 @@
 //  --------------------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.ComponentModel;
 
 using PizzaManagement.Models;
-
+using PizzaManagement.Notification;
 
 namespace PizzaManagement.ViewModels
 {
-   /// <summary>
-   /// </summary>
-   /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
-   public class ClientViewModel : Sender, INotifyPropertyChanged
-   {
-      #region Members
+    /// <summary>
+    /// </summary>
+    /// <seealso cref="System.ComponentModel.INotifyPropertyChanged" />
+    public class ClientViewModel : Sender
+    {
+        #region Members
 
-      private string _message;
+        private string _message;
 
-      #endregion
+        private string _emailMessage;
 
-      #region Constructors
+        private string _smsMessage;
 
-      /// <summary>
-      ///    Initializes a new instance of the <see cref="ClientViewModel" /> class.
-      /// </summary>
-      /// <param name="mediator">The mediator.</param>
-      public ClientViewModel( Mediator mediator ) : base(mediator)
-      {         
-         CreateOrder();
-         PizzaCommand = new Command( OrderPizza );
-      }
+        #endregion
 
-      #endregion
+        #region Constructors
 
-      #region Properties
+        /// <summary>
+        ///    Initializes a new instance of the <see cref="ClientViewModel" /> class.
+        /// </summary>
+        /// <param name="mediator">The mediator.</param>
+        public ClientViewModel(Mediator mediator) : base(mediator)
+        {
+            CreateOrder();
+            PizzaCommand = new Command(OrderPizza);
+        }
 
-      /// <summary>
-      ///    Gets or sets a value indicating whether this instance has corn topping.
-      /// </summary>
-      /// <value>
-      ///    <c>true</c> if this instance has corn topping; otherwise, <c>false</c>.
-      /// </value>
-      public bool HasCornTopping
-      {
-         get { return Order.Toppings.Contains( ToppingType.Corn ); }
-         set
-         {
-            if( value ) {
-               Order.Toppings.Add( ToppingType.Corn );
-            } else if( Order.Toppings.Contains( ToppingType.Corn ) ) {
-               Order.Toppings.Remove( ToppingType.Corn );
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        ///    Gets or sets a value indicating whether this instance has corn topping.
+        /// </summary>
+        /// <value>
+        ///    <c>true</c> if this instance has corn topping; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasCornTopping
+        {
+            get { return Order.Toppings.Contains(ToppingType.Corn); }
+            set
+            {
+                if (value)
+                {
+                    Order.Toppings.Add(ToppingType.Corn);
+                }
+                else if (Order.Toppings.Contains(ToppingType.Corn))
+                {
+                    Order.Toppings.Remove(ToppingType.Corn);
+                }
+                RaisePropertyChanged(nameof(HasCornTopping));
             }
-            RaisePropertyChanged( nameof( HasCornTopping ) );
-         }
-      }
+        }
 
-      /// <summary>
-      ///    Gets or sets a value indicating whether this instance has olives topping.
-      /// </summary>
-      /// <value>
-      ///    <c>true</c> if this instance has olives topping; otherwise, <c>false</c>.
-      /// </value>
-      public bool HasOlivesTopping
-      {
-         get { return Order.Toppings.Contains( ToppingType.Olives ); }
-         set
-         {
-            if( value ) {
-               Order.Toppings.Add( ToppingType.Olives );
-            } else if( Order.Toppings.Contains( ToppingType.Olives ) ) {
-               Order.Toppings.Remove( ToppingType.Olives );
+        /// <summary>
+        ///    Gets or sets a value indicating whether this instance has olives topping.
+        /// </summary>
+        /// <value>
+        ///    <c>true</c> if this instance has olives topping; otherwise, <c>false</c>.
+        /// </value>
+        public bool HasOlivesTopping
+        {
+            get { return Order.Toppings.Contains(ToppingType.Olives); }
+            set
+            {
+                if (value)
+                {
+                    Order.Toppings.Add(ToppingType.Olives);
+                }
+                else if (Order.Toppings.Contains(ToppingType.Olives))
+                {
+                    Order.Toppings.Remove(ToppingType.Olives);
+                }
+                RaisePropertyChanged(nameof(HasOlivesTopping));
             }
-            RaisePropertyChanged( nameof( HasOlivesTopping ) );
-         }
-      }
-    
-      /// <summary>
-      ///    Gets or sets the message.
-      /// </summary>
-      /// <value>
-      ///    The message.
-      /// </value>
-      public string Message
-      {
-         get { return _message; }
-         set
-         {
-            _message = value;
-            RaisePropertyChanged( nameof( Message ) );
-         }
-      }
+        }
 
-      /// <summary>
-      ///    Gets or sets the order.
-      /// </summary>
-      /// <value>
-      ///    The order.
-      /// </value>
-      public Order Order { get; set; }
+        /// <summary>
+        ///    Gets or sets the message.
+        /// </summary>
+        /// <value>
+        ///    The message.
+        /// </value>
+        public string Message
+        {
+            get { return _message; }
+            set
+            {
+                _message = value;
+                RaisePropertyChanged(nameof(Message));
+            }
+        }
 
-      /// <summary>
-      ///    Gets the pizza command.
-      /// </summary>
-      /// <value>
-      ///    The pizza command.
-      /// </value>
-      public Command PizzaCommand { get; private set; }
+        /// <summary>
+        /// Gets or sets the email message.
+        /// </summary>
+        /// <value>
+        /// The email message.
+        /// </value>
+        public string EmailMessage
+        {
+            get { return _emailMessage; }
+            set
+            {
+                _emailMessage = value;
+                RaisePropertyChanged(nameof(EmailMessage));
+            }
+        }
 
-      #endregion
+        public string SmsMessage
+        {
+            get { return _smsMessage; }
+            set
+            {
+                _smsMessage = value;
+                RaisePropertyChanged(nameof(SmsMessage));
+            }
+        }
 
-      #region Interface Members
+        /// <summary>
+        ///    Gets or sets the order.
+        /// </summary>
+        /// <value>
+        ///    The order.
+        /// </value>
+        public Order Order { get; set; }
 
-      public event PropertyChangedEventHandler PropertyChanged;
+        /// <summary>
+        ///    Gets the pizza command.
+        /// </summary>
+        /// <value>
+        ///    The pizza command.
+        /// </value>
+        public Command PizzaCommand { get; private set; }
 
-      #endregion
+        #endregion
 
-      #region Methods - Public
+        #region Methods - Public
 
-      public override void Notify( Order order, string message )
-      {
-         Message = message;
-      }
+        /// <summary>
+        /// Notifies the specified order.
+        /// </summary>
+        /// <param name="order">The order.</param>
+        /// <param name="message">The message.</param>
+        public override void Notify(Order order, string message)
+        {
+            Message = message;
 
-      #endregion
+            NotifyByBridge(message);
+        }
 
-      #region Methods - Protected
+        /// <summary>
+        /// Notifies the by bridge.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        private void NotifyByBridge(string message)
+        {
+            BridgeNotifier bridgeNotifier = new BridgeNotifier(this);
+            bridgeNotifier.SendMessage(message);
+            bridgeNotifier.SetService(new SmsMessenger(this));
+            bridgeNotifier.SendMessage(message);
+        }
 
-      protected virtual void RaisePropertyChanged( string propertyName )
-      {
-         PropertyChanged?.Invoke( this, new PropertyChangedEventArgs( propertyName ) );
-      }
+        #endregion
 
-      #endregion
+        #region Methods - Private
 
-      #region Methods - Private
+        /// <summary>
+        ///    Creates the order.
+        /// </summary>
+        private void CreateOrder()
+        {
+            Order = new Order
+            {
+                PizzaType = PizzaType.CheesePizza,
+                DoughType = DoughType.Thin,
+                PizzaSize = PizzaSize.Large,
+                Toppings = new List<ToppingType>()
+            };
+        }
 
-      /// <summary>
-      ///    Creates the order.
-      /// </summary>
-      private void CreateOrder()
-      {
-         Order = new Order {
-            PizzaType = PizzaType.CheesePizza,
-            DoughType = DoughType.Thin,
-            PizzaSize = PizzaSize.Large,
-            Toppings = new List<ToppingType>()
-         };
-      }
+        /// <summary>
+        ///    Orders the pizza.
+        /// </summary>
+        /// <param name="obj">The object.</param>
+        private void OrderPizza(object obj)
+        {
+            Mediator.Send(this, Order);
+        }
 
-      /// <summary>
-      ///    Orders the pizza.
-      /// </summary>
-      /// <param name="obj">The object.</param>
-      private void OrderPizza( object obj )
-      {
-         Mediator.Send( this, Order );
-      }
-
-      #endregion
-   }
+        #endregion
+    }
 }

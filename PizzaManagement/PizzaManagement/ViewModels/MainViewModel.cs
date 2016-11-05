@@ -7,7 +7,7 @@
 using System.Diagnostics;
 
 using PizzaManagement.Models;
-
+using System;
 
 namespace PizzaManagement.ViewModels
 {
@@ -58,7 +58,7 @@ namespace PizzaManagement.ViewModels
          if( sender == Client ) {
             Manufacturer.Notify( order, "You have a new order" );
          } else if( sender == Manufacturer ) {
-            Client.Notify( order, "Pizza sent" );
+            Client.Notify( order, $"Pizza sent: {Environment.NewLine}{order}" );
          } else {
             Debug.Fail( "Unknown sender" );
          }

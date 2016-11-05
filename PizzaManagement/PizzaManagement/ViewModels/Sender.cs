@@ -9,7 +9,7 @@ using PizzaManagement.Models;
 
 namespace PizzaManagement.ViewModels
 {
-   public abstract class Sender
+   public abstract class Sender:BaseModel
    {
       #region Constructors
 
