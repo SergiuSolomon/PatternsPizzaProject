@@ -4,6 +4,7 @@
 //  </Copyright>
 //  --------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -131,7 +132,7 @@ namespace PizzaManagement.ViewModels
         {
             Order order = (Order)obj;
             IPizza pizza = Kitchen.Instance.MakePizza(order.PizzaType, order.PizzaSize, order.DoughType, order.Toppings);
-            Message = "Pizza ready to send";
+            Message = $"Pizza ready to send {Environment.NewLine}{pizza}";
 
             order.Status = Status.OrderProcessed;
         }
