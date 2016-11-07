@@ -4,8 +4,8 @@ namespace PizzaManagement
 {
    public interface IPizza
    {
-      decimal ProductionPrice { get; }
-      decimal FinalPrice { get; }
+      decimal Price { get; }
+      decimal Calories { get; }
       decimal Weight { get; }
       PizzaSize Size { get; }
       DoughType DoughType { get; }

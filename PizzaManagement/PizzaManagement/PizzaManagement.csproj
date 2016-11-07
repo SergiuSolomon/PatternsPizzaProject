@@ -58,6 +58,9 @@
     <Compile Include="CheesePizzaBuilderDecorator.cs" />
     <Compile Include="CornPizzaBuilderDecorator.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="PriceVisitor.cs" />
+    <Compile Include="ISubstanceVisitor.cs" />
+    <Compile Include="Ingredient.cs" />
     <Compile Include="IPizzaBuilder.cs" />
     <Compile Include="Kitchen.cs" />
     <Compile Include="LargePizza.cs" />
@@ -69,6 +72,9 @@
     <Compile Include="Notification\IBridgeNotifier.cs" />
     <Compile Include="Notification\IMessenger.cs" />
     <Compile Include="Notification\SmsMessenger.cs" />
+    <Compile Include="Substance.cs" />
+    <Compile Include="Topping.cs" />
+    <Compile Include="CalorieVisitor.cs" />
     <Compile Include="ViewModels\BaseModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="IPizza.cs" />

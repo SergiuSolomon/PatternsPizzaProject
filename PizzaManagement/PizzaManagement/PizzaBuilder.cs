@@ -17,7 +17,15 @@ namespace PizzaManagement
       {}
 
       public virtual void Cook()
-      {}
+      {
+         PriceVisitor priceVisitor = new PriceVisitor();
+         _pizza.Accept( priceVisitor );
+         _pizza.Price = priceVisitor.TotalPrice;
+
+         CalorieVisitor calorieVisitor = new CalorieVisitor();
+         _pizza.Accept( calorieVisitor );
+         _pizza.Calories = calorieVisitor.TotalCalories;
+      }
 
       public virtual IPizza GetPizza()
       {
